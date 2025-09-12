@@ -1,0 +1,77 @@
+MACRO register
+  CLASS BLOCK ;
+  FOREIGN register ;
+  ORIGIN 4.500 0.500 ;
+  SIZE 34.590 BY 6.440 ;
+  PIN CLK
+    DIRECTION INPUT ;
+    USE CLOCK ;
+    ANTENNAGATEAREA 0.213000 ;
+    PORT
+      LAYER met1 ;
+        RECT -4.500 3.630 -4.140 3.860 ;
+    END
+  END CLK
+  PIN D
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    ANTENNAGATEAREA 0.159000 ;
+    PORT
+      LAYER met1 ;
+        RECT -4.500 2.090 -4.140 2.320 ;
+    END
+  END D
+  PIN WEN
+    DIRECTION INPUT ;
+    USE SIGNAL ;
+    ANTENNAGATEAREA 0.318000 ;
+    PORT
+      LAYER met1 ;
+        RECT -4.500 1.410 -4.140 1.640 ;
+    END
+  END WEN
+  PIN Q
+    DIRECTION OUTPUT ;
+    USE SIGNAL ;
+    ANTENNAGATEAREA 0.159000 ;
+    ANTENNADIFFAREA 0.429000 ;
+    PORT
+      LAYER met1 ;
+        RECT -4.500 0.730 -4.140 0.960 ;
+    END
+  END Q
+  PIN VPWR
+    DIRECTION INOUT ;
+    USE POWER ;
+    PORT
+      LAYER met4 ;
+        RECT 2.000 -0.500 3.700 5.940 ;
+    END
+  END VPWR
+  PIN VGND
+    DIRECTION INOUT ;
+    USE GROUND ;
+    PORT
+      LAYER met4 ;
+        RECT 5.000 -0.500 6.700 5.940 ;
+    END
+  END VGND
+  OBS
+      LAYER nwell ;
+        RECT -4.330 -0.190 30.090 5.630 ;
+      LAYER li1 ;
+        RECT -4.140 -0.085 29.900 5.525 ;
+      LAYER met1 ;
+        RECT -4.140 4.140 29.900 5.680 ;
+        RECT -3.860 3.350 29.900 4.140 ;
+        RECT -4.140 2.600 29.900 3.350 ;
+        RECT -3.860 0.450 29.900 2.600 ;
+        RECT -4.140 -0.240 29.900 0.450 ;
+      LAYER met2 ;
+        RECT 1.340 -0.170 29.330 5.610 ;
+      LAYER met3 ;
+        RECT 2.000 -0.170 6.700 5.610 ;
+  END
+END register
+END LIBRARY
+

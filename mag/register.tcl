@@ -1,0 +1,231 @@
+set REPEATS 4
+set ROW_HEIGHT 544
+set ROW_HALF_HEIGHT 272
+
+# Instantiate the cells
+for {set i 0} {$i < $REPEATS} {incr i} {
+    box [expr $i * 736] $ROW_HALF_HEIGHT [expr $i * 736] $ROW_HALF_HEIGHT
+    getcell sky130_fd_sc_hd__dfxtp_1
+    box [expr $i * 736] 0 [expr $i * 736] 0
+    getcell sky130_fd_sc_hd__dfxtp_1 180
+}
+box [expr 736 * $REPEATS] $ROW_HALF_HEIGHT [expr 736 * $REPEATS] $ROW_HALF_HEIGHT
+getcell sky130_fd_sc_hd__tapvpwrvgnd_1
+box [expr 736 * $REPEATS] 0 [expr 736 * $REPEATS] 0
+getcell sky130_fd_sc_hd__tapvpwrvgnd_1 v
+
+box -276 $ROW_HALF_HEIGHT 0 $ROW_HALF_HEIGHT
+getcell sky130_fd_sc_hd__clkbuf_4
+box -414 $ROW_HALF_HEIGHT -276 $ROW_HALF_HEIGHT
+getcell sky130_fd_sc_hd__decap_3
+box -414 0 0 0
+getcell sky130_fd_sc_hd__mux2_2 180
+
+# Clk wiring
+box -234 360 -200 394
+paint metal1
+
+label CLK FreeSans 0.125u -met1
+port make
+port use clock
+port class input
+port connections n s e w
+
+box -228 366 -206 383
+paint viali
+
+box -10 369.5 9 430.5
+paint locali
+box 12 487 [expr 736 * $REPEATS - 11] 503
+paint metal1
+box 699 41 [expr 736 * $REPEATS - 11] 57
+paint metal1
+box [expr 736 * $REPEATS - 40] 458 [expr 736 * $REPEATS - 11] 503
+paint metal1
+box [expr 736 * $REPEATS - 40] 464 [expr 736 * $REPEATS - 11] 497
+paint via1
+box [expr 736 * $REPEATS - 40] 120 [expr 736 * $REPEATS - 11] 153
+paint via1
+box [expr 736 * $REPEATS - 40] 117 [expr 736 * $REPEATS - 11] 500
+paint metal2
+box [expr 736 * $REPEATS - 40] 57 [expr 736 * $REPEATS - 11] 160
+paint metal1
+
+for {set i 0} {$i < $REPEATS} {incr i} {
+    box [expr $i * 736 + 702] 120 [expr $i * 736 + 721] 154
+    paint viali
+    box [expr $i * 736 + 699] 57 [expr $i * 736 + 724] 160
+    paint metal1
+
+    box [expr $i * 736 + 15] 390 [expr $i * 736 + 34] 424
+    paint viali
+    box [expr $i * 736 + 12] 384 [expr $i * 736 + 37] 487
+    paint metal1
+}
+
+
+# Data wiring
+for {set i 0} {$i < [expr $REPEATS - 1]} {incr i} {
+    box [expr $i * 736 + 696] 315 [expr $i * 736 + 713] 332
+    paint viali
+    box [expr ($i + 1) * 736 + 143] 381 [expr ($i + 1) * 736 + 160] 398
+    paint viali
+    box [expr ($i + 1) * 736 + 140] 312 [expr ($i + 1) * 736 + 163] 404
+    paint metal1
+
+    # Intentionally add some extra capacitance to improve hold timing
+    box [expr $i * 736 + 250] 312 [expr ($i + 1) * 736 + 200] 364
+    paint metal1
+
+    box [expr ($i + 1) * 736 + 24] 212 [expr ($i + 1) * 736 + 41] 229
+    paint viali
+    box [expr $i * 736 + 575] 146 [expr $i * 736 + 592] 163
+    paint viali
+    box [expr $i * 736 + 572] 140 [expr $i * 736 + 595] 212
+    paint metal1
+
+    # Intentionally add some extra capacitance to improve hold timing
+    box [expr $i * 736 + 250] 180 [expr ($i + 1) * 736 + 200] 232
+    paint metal1
+}
+
+box [expr $i * 736 + 696] 315 [expr $i * 736 + 713] 332
+paint viali
+box [expr $i * 736 + 500] 312 [expr ($i + 1) * 736] 364
+paint metal1
+
+box [expr $i * 736 + 575] 146 [expr $i * 736 + 592] 163
+paint viali
+box [expr $i * 736 + 500] 180 [expr ($i + 1) * 736] 232
+paint metal1
+box [expr $i * 736 + 572] 140 [expr $i * 736 + 595] 212
+paint metal1
+
+box [expr $i * 736 + 600] 200 [expr $i * 736 + 626] 226
+paint via1
+box [expr $i * 736 + 590] 192 [expr $i * 736 + 634] 350
+paint metal2
+box [expr $i * 736 + 600] 318 [expr $i * 736 + 626] 344
+paint via1
+
+
+# Wiring to mux
+box -228 162 -206 179
+paint viali
+box -234 159 47 182
+paint metal1
+box 13 182 47 232
+paint metal1
+box 24 212 41 229
+paint viali
+
+box 143 381 160 398
+paint viali
+box 140 312 163 404
+paint metal1
+box 134 312 166 344
+paint metal1
+box 137 315 163 341
+paint via1
+
+box -77 79 -59 96
+paint viali
+box -83 76 160 99
+paint metal1
+box 137 99 160 231
+paint metal1
+box 134 199 166 231
+paint metal1
+box 137 202 163 228
+paint via1
+box 134 199 166 344
+paint metal2
+
+# Inputs
+box -308 212 -291 229
+paint viali
+box -314 198 -280 232
+paint metal1
+
+label D FreeSans 0.125u -met1
+port make
+port use signal
+port class input
+port connections n s e w
+
+box -354 144 -337 161
+paint viali
+box -365 135 -331 169
+paint metal1
+
+label WEN FreeSans 0.125u -met1
+port make
+port use signal
+port class input
+port connections n s e w
+
+
+# Outputs
+box 13 198 47 232
+label Q FreeSans 0.125u -met1
+port make
+port use signal
+port class output
+port connections n s e w
+
+
+# PWR
+for {set i 0} {$i < 2} {incr i} {
+    for {set j 0} {$j < 4} {incr j} {
+        box [expr $j * 40 + 209 - 20] [expr $i * $ROW_HEIGHT - 16] [expr $j * 40 + 241 - 20] [expr $i * $ROW_HEIGHT + 16]
+        paint via3
+        box [expr $j * 40 + 211 - 20] [expr $i * $ROW_HEIGHT - 14] [expr $j * 40 + 239 - 20] [expr $i * $ROW_HEIGHT + 14]
+        paint via2
+    }
+    for {set j 0} {$j < 5} {incr j} {
+        box [expr $j * 32 + 208 - 20] [expr $i * $ROW_HEIGHT - 14] [expr $j * 32 + 234 - 20] [expr $i * $ROW_HEIGHT + 14]
+        paint via1
+    }
+    box 180 [expr $i * $ROW_HEIGHT - 17] 350 [expr $i * $ROW_HEIGHT + 17]
+    paint metal3
+    box 180 [expr $i * $ROW_HEIGHT - 17] 350 [expr $i * $ROW_HEIGHT + 17]
+    paint metal2
+}
+
+# GND
+for {set j 0} {$j < 4} {incr j} {
+    box [expr $j * 40 + 509 - 20] [expr -16 + 272] [expr $j * 40 + 541 - 20] [expr 16 + 272]
+    paint via3
+    box [expr $j * 40 + 511 - 20] [expr -14 + 272] [expr $j * 40 + 539 - 20] [expr 14 + 272]
+    paint via2
+}
+for {set j 0} {$j < 5} {incr j} {
+    box [expr $j * 32 + 508 - 20] [expr -14 + 272] [expr $j * 32 + 534 - 20] [expr 14 + 272]
+    paint via1
+}
+box 480 [expr -17 + 272] 650 [expr 17 + 272]
+paint metal3
+box 480 [expr -17 + 272] 650 [expr 17 + 272]
+paint metal2
+
+# Power
+box 180 -50 350 [expr $ROW_HEIGHT + 50]
+paint metal4
+label VPWR FreeSans 0.25u -met4
+port make
+port use power
+port class bidirectional
+port connections n s e w
+
+# Ground
+box 480 -50 650 [expr $ROW_HEIGHT + 50]
+paint metal4
+label VGND FreeSans 0.25u -met4
+port make
+port use ground
+port class bidirectional
+port connections n s e w
+
+box -414 -50 [expr $REPEATS * 736 + 46] [expr $ROW_HEIGHT + 50]
+save register.mag
+quit -noprompt
