@@ -54,9 +54,9 @@ for {set i 0} {$i < $REPEATS} {incr i} {
     add_via2 -314 [expr $i * $ROW_HEIGHT + 198]
 }
 for {set i 0} {$i < 3} {incr i} {
-    box -314 [expr $i * $ROW_HEIGHT + 198] [expr (2 - $i) * 60 - 220] [expr $i * $ROW_HEIGHT + 232]
+    box -314 [expr $i * $ROW_HEIGHT + 198] [expr (2 - $i) * 80 - 200] [expr $i * $ROW_HEIGHT + 232]
     paint metal3
-    box [expr (2 - $i) * 60 - 250] [expr $i * $ROW_HEIGHT + 198] [expr (2 - $i) * 60 - 220] [expr $REPEATS * $ROW_HEIGHT + 50]
+    box [expr (2 - $i) * 80 - 230] [expr $i * $ROW_HEIGHT + 198] [expr (2 - $i) * 80 - 200] [expr $REPEATS * $ROW_HEIGHT + 50]
     paint metal3
 }
 box -314 [expr $i * $ROW_HEIGHT + 198] -280 [expr $REPEATS * $ROW_HEIGHT + 50]
@@ -81,7 +81,8 @@ paint metal2
 
 
 # Power
-box 180 -50 350 [expr $REPEATS*$ROW_HEIGHT + 50]
+set POWER_OFFSET 1800
+box [expr 200 + $POWER_OFFSET] -50 [expr 370 + $POWER_OFFSET] [expr $REPEATS*$ROW_HEIGHT + 50]
 label VPWR FreeSans 0.25u -met4
 port make
 port use power
@@ -89,7 +90,7 @@ port class bidirectional
 port connections n s e w
 
 # Ground
-box 480 -50 650 [expr $REPEATS*$ROW_HEIGHT + 50]
+box [expr 500 + $POWER_OFFSET] -50 [expr 670 + $POWER_OFFSET] [expr $REPEATS*$ROW_HEIGHT + 50]
 label VGND FreeSans 0.25u -met4
 port make
 port use ground

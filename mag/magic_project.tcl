@@ -45,6 +45,8 @@ foreach {name x} $POWER_STRIPES {
     draw_power_stripe $name $x
 }
 
+box 1020 1000 1020 1000
+getcell register8 child 0 0
 
 proc draw_top_signal_wire {cxl cyl cxt hyl px} {
     box $cxl $cyl $cxt [expr $hyl + 36]

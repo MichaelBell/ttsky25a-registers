@@ -174,42 +174,43 @@ port class output
 port connections n s e w
 
 
+set POWER_OFFSET 1800
 # PWR
 for {set i 0} {$i < 2} {incr i} {
     for {set j 0} {$j < 4} {incr j} {
-        box [expr $j * 40 + 209 - 20] [expr $i * $ROW_HEIGHT - 16] [expr $j * 40 + 241 - 20] [expr $i * $ROW_HEIGHT + 16]
+        box [expr $j * 40 + 209 + $POWER_OFFSET] [expr $i * $ROW_HEIGHT - 16] [expr $j * 40 + 241 + $POWER_OFFSET] [expr $i * $ROW_HEIGHT + 16]
         paint via3
-        box [expr $j * 40 + 211 - 20] [expr $i * $ROW_HEIGHT - 14] [expr $j * 40 + 239 - 20] [expr $i * $ROW_HEIGHT + 14]
+        box [expr $j * 40 + 211 + $POWER_OFFSET] [expr $i * $ROW_HEIGHT - 14] [expr $j * 40 + 239 + $POWER_OFFSET] [expr $i * $ROW_HEIGHT + 14]
         paint via2
     }
     for {set j 0} {$j < 5} {incr j} {
-        box [expr $j * 32 + 208 - 20] [expr $i * $ROW_HEIGHT - 14] [expr $j * 32 + 234 - 20] [expr $i * $ROW_HEIGHT + 14]
+        box [expr $j * 32 + 208 + $POWER_OFFSET] [expr $i * $ROW_HEIGHT - 14] [expr $j * 32 + 234 + $POWER_OFFSET] [expr $i * $ROW_HEIGHT + 14]
         paint via1
     }
-    box 180 [expr $i * $ROW_HEIGHT - 17] 350 [expr $i * $ROW_HEIGHT + 17]
+    box [expr 200 + $POWER_OFFSET] [expr $i * $ROW_HEIGHT - 17] [expr 370 + $POWER_OFFSET] [expr $i * $ROW_HEIGHT + 17]
     paint metal3
-    box 180 [expr $i * $ROW_HEIGHT - 17] 350 [expr $i * $ROW_HEIGHT + 17]
+    box [expr 200 + $POWER_OFFSET] [expr $i * $ROW_HEIGHT - 17] [expr 370 + $POWER_OFFSET] [expr $i * $ROW_HEIGHT + 17]
     paint metal2
 }
 
 # GND
 for {set j 0} {$j < 4} {incr j} {
-    box [expr $j * 40 + 509 - 20] [expr -16 + 272] [expr $j * 40 + 541 - 20] [expr 16 + 272]
+    box [expr $j * 40 + 509 + $POWER_OFFSET] [expr -16 + 272] [expr $j * 40 + 541 + $POWER_OFFSET] [expr 16 + 272]
     paint via3
-    box [expr $j * 40 + 511 - 20] [expr -14 + 272] [expr $j * 40 + 539 - 20] [expr 14 + 272]
+    box [expr $j * 40 + 511 + $POWER_OFFSET] [expr -14 + 272] [expr $j * 40 + 539 + $POWER_OFFSET] [expr 14 + 272]
     paint via2
 }
 for {set j 0} {$j < 5} {incr j} {
-    box [expr $j * 32 + 508 - 20] [expr -14 + 272] [expr $j * 32 + 534 - 20] [expr 14 + 272]
+    box [expr $j * 32 + 508 + $POWER_OFFSET] [expr -14 + 272] [expr $j * 32 + 534 + $POWER_OFFSET] [expr 14 + 272]
     paint via1
 }
-box 480 [expr -17 + 272] 650 [expr 17 + 272]
+box [expr 500 + $POWER_OFFSET] [expr -17 + 272] [expr 670 + $POWER_OFFSET] [expr 17 + 272]
 paint metal3
-box 480 [expr -17 + 272] 650 [expr 17 + 272]
+box [expr 500 + $POWER_OFFSET] [expr -17 + 272] [expr 670 + $POWER_OFFSET] [expr 17 + 272]
 paint metal2
 
 # Power
-box 180 -50 350 [expr $ROW_HEIGHT + 50]
+box [expr 200 + $POWER_OFFSET] -50 [expr 370 + $POWER_OFFSET] [expr $ROW_HEIGHT + 50]
 paint metal4
 label VPWR FreeSans 0.25u -met4
 port make
@@ -218,7 +219,7 @@ port class bidirectional
 port connections n s e w
 
 # Ground
-box 480 -50 650 [expr $ROW_HEIGHT + 50]
+box [expr 500 + $POWER_OFFSET] -50 [expr 670 + $POWER_OFFSET] [expr $ROW_HEIGHT + 50]
 paint metal4
 label VGND FreeSans 0.25u -met4
 port make
