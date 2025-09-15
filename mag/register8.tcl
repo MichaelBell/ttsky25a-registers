@@ -80,11 +80,24 @@ paint metal1
 box -221 2283 -201 2303
 paint viali
 
-box -231 4503 -203 4531
+box -366 2333 -346 2357
+paint viali
+box -405 2330 -340 2360
+paint metal1
+add_via1_m1_m2 -405 2330
+box -405 2362 -385 4304
+paint metal2
+add_via1_m1_m2 -419 4270
+box -405 4270 -166 4304
+paint metal1
+add_via1_m1 -200 4270
+box -203 4268 53 4306
+paint metal2
+box 20 4273 50 4301
 paint via2
-box -234 4500 -200 4534
+box 17 4270 53 4304
 paint metal3
-box -200 4504 -120 4534
+box 53 4274 120 4304
 paint metal3
 label CLK FreeSans 0.125u -met3
 port make

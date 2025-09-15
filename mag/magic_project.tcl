@@ -89,7 +89,7 @@ proc draw_side_signal_wire_b {cxl cyl px} {
     paint metal4
 }
 
-draw_side_signal_wire 880 9558 14398   ;#CLK
+draw_side_signal_wire 1120 9328 14398   ;#CLK
 draw_side_signal_wire_b 780 9788 11362 ;#WEN1
 draw_side_signal_wire 780 9848 11638   ;#WEN0
 

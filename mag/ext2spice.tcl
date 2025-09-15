@@ -1,5 +1,5 @@
-#load tt_um_rebelmike_incrementer.mag
-load register.mag
+load tt_um_rebelmike_register.mag
+#load register.mag
 flatten tt_um_flat
 load tt_um_flat
 select top cell
