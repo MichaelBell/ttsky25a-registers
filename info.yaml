@@ -1,9 +1,9 @@
 # Tiny Tapeout project information
 project:
-  title:        "Registers"      # Project title
+  title:        "Circulating register test"      # Project title
   author:       "Mike Bell"      # Your name
   discord:      "rebelmike"      # Your discord username, for communication and automatically assigning you a Tapeout role (optional)
-  description:  "TODO"      # One line description of what your project does
+  description:  "Test of a manually placed circulating register suitable for TinyQV's register file"      # One line description of what your project does
   language:     "Magic" # other examples include Verilog, Amaranth, VHDL, etc
   clock_hz:     10       # Clock frequency in Hz (or 0 if not applicable)
 
@@ -21,9 +21,9 @@ project:
 # This section is for the datasheet/website. Use descriptive names (e.g., RX, TX, MOSI, SCL, SEG_A, etc.).
 pinout:
   # Inputs
-  ui[0]: "Addr read port 0"
+  ui[0]: "Addr read port A"
   ui[1]: ""
-  ui[2]: "Addr read port 1"
+  ui[2]: "Addr read port B"
   ui[3]: ""
   ui[4]: "Data 0"
   ui[5]: "Data 1"
@@ -31,14 +31,14 @@ pinout:
   ui[7]: "Data 3"
 
   # Outputs
-  uo[0]: "Data 0 port 0"
-  uo[1]: "Data 1 port 0"
-  uo[2]: "Data 2 port 0"
-  uo[3]: "Data 3 port 0"
-  uo[4]: "Data 0 port 1"
-  uo[5]: "Data 1 port 1"
-  uo[6]: "Data 2 port 1"
-  uo[7]: "Data 3 port 1"
+  uo[0]: "Data 0 port A"
+  uo[1]: "Data 1 port A"
+  uo[2]: "Data 2 port A"
+  uo[3]: "Data 3 port A"
+  uo[4]: "Data 0 port B"
+  uo[5]: "Data 1 port B"
+  uo[6]: "Data 2 port B"
+  uo[7]: "Data 3 port B"
 
   # Bidirectional pins
   uio[0]: "Write enable reg 0"

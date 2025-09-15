@@ -29,7 +29,7 @@ for {set i 0} {$i < $REPEATS} {incr i} {
 box -234 360 -200 [expr $i * $ROW_HEIGHT + 50]
 paint metal2
 box -234 [expr $i * $ROW_HEIGHT + 14] -200 [expr $i * $ROW_HEIGHT + 50]
-label CLK FreeSans 0.125u -met1
+label CLK FreeSans 0.125u -met2
 port make
 port use clock
 port class input
@@ -40,10 +40,9 @@ port connections n s e w
 for {set i 0} {$i < $REPEATS} {incr i} {
     add_via1 -365 [expr $i * $ROW_HEIGHT + 135]
 }
-box -365 135 -331 [expr $i * $ROW_HEIGHT + 50]
+box -365 135 -331 [expr ($REPEATS - 1) * $ROW_HEIGHT + 169]
 paint metal2
-box -365 [expr $i * $ROW_HEIGHT + 14] -331 [expr $i * $ROW_HEIGHT + 50]
-label WEN FreeSans 0.125u -met1
+label WEN FreeSans 0.125u -met2
 port make
 port use signal
 port class input

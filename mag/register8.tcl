@@ -26,6 +26,16 @@ box [expr -92 + $i * 414] [expr 4 * $ROW_HEIGHT] [expr -92 + $i * 414] [expr 4 *
 getcell sky130_fd_sc_hd__buf_2 180
 box [expr -138 + $i * 414] [expr 4 * $ROW_HEIGHT + $ROW_HALF_HEIGHT] [expr -138 + $i * 414] [expr 4 * $ROW_HEIGHT + $ROW_HALF_HEIGHT]
 getcell sky130_fd_sc_hd__buf_2 h
+box 1702 [expr 4 * $ROW_HEIGHT + $ROW_HALF_HEIGHT] 1702 [expr 4 * $ROW_HEIGHT + $ROW_HALF_HEIGHT]
+getcell sky130_fd_sc_hd__fill_1
+box 1748 [expr 4 * $ROW_HEIGHT + $ROW_HALF_HEIGHT] 1748 [expr 4 * $ROW_HEIGHT + $ROW_HALF_HEIGHT]
+getcell sky130_ef_sc_hd__decap_12
+box 1748 [expr 4 * $ROW_HEIGHT] 1748 [expr 4 * $ROW_HEIGHT]
+getcell sky130_ef_sc_hd__decap_12 v
+box 2300 [expr 4 * $ROW_HEIGHT + $ROW_HALF_HEIGHT] 2300 [expr 4 * $ROW_HEIGHT + $ROW_HALF_HEIGHT]
+getcell sky130_ef_sc_hd__decap_12
+box 2300 [expr 4 * $ROW_HEIGHT] 2300 [expr 4 * $ROW_HEIGHT]
+getcell sky130_ef_sc_hd__decap_12 v
 
 
 proc add_via1 {llx lly} {
@@ -70,13 +80,49 @@ paint metal1
 box -221 2283 -201 2303
 paint viali
 
+box -231 4503 -203 4531
+paint via2
+box -234 4500 -200 4534
+paint metal3
+box -200 4504 -120 4534
+paint metal3
+label CLK FreeSans 0.125u -met3
+port make
+port use clock
+port class input
+port connections n s e w
+
 # WEN
+box -365 1801 -331 2224
+paint metal2
 box -378 2186 -331 2224
 paint metal2
 box -375 2191 -347 2219
 paint via2
-box -378 2186 -344 4946
+box -378 2186 -344 4824
 paint metal3
+box -378 4794 -220 4824
+paint metal3
+label WEN0 FreeSans 0.125u -met3
+port make
+port use signal
+port class input
+port connections n s e w
+
+box -365 4730 -268 4764
+paint metal2
+box -301 4733 -273 4761
+paint via2
+box -305 4730 -260 4764
+paint metal3
+box -260 4734 -220 4764
+paint metal3
+label WEN1 FreeSans 0.125u -met3
+port make
+port use signal
+port class input
+port connections n s e w
+
 
 # Data IN
 box -314 3033 -280 3068
@@ -86,7 +132,7 @@ paint via3
 box -317 3032 -277 4946
 paint metal4
 box -317 4896 -277 4946
-label D_0 FreeSans 0.25u -met4
+label D0 FreeSans 0.25u -met4
 port make
 port use signal
 port class input
@@ -105,7 +151,7 @@ for {set i 1} {$i < 4} {incr i} {
     box [expr -317 + $i * 80] [expr 3576 + ($i - 1) * $ROW_HEIGHT] [expr -277 + $i * 80] 4946
     paint metal4
     box [expr -317 + $i * 80] 4896 [expr -277 + $i * 80] 4946
-    label D_$i FreeSans 0.25u -met4
+    label D$i FreeSans 0.25u -met4
     port make
     port use signal
     port class input
@@ -208,7 +254,7 @@ for {set i 0} {$i < 4} {incr i} {
     box [expr 127 + $i * 414] 2625 [expr 167 + $i * 414] 4946
     paint metal4
     box [expr 127 + $i * 414] 4896 [expr 167 + $i * 414] 4946
-    label QB_$i FreeSans 0.25u -met4
+    label QB$i FreeSans 0.25u -met4
     port make
     port use signal
     port class output
@@ -224,7 +270,7 @@ for {set i 0} {$i < 4} {incr i} {
     box [expr 207 + $i * 414] 2258 [expr 247 + $i * 414] 4946
     paint metal4
     box [expr 207 + $i * 414] 4896 [expr 247 + $i * 414] 4946
-    label QA_$i FreeSans 0.25u -met4
+    label QA$i FreeSans 0.25u -met4
     port make
     port use signal
     port class output
@@ -236,6 +282,7 @@ for {set i 0} {$i < 4} {incr i} {
 # Power
 set POWER_OFFSET 1800
 box [expr 200 + $POWER_OFFSET] -50 [expr 370 + $POWER_OFFSET] [expr 9*$ROW_HEIGHT + 50]
+paint metal4
 label VPWR FreeSans 0.25u -met4
 port make
 port use power
@@ -244,11 +291,27 @@ port connections n s e w
 
 # Ground
 box [expr 500 + $POWER_OFFSET] -50 [expr 670 + $POWER_OFFSET] [expr 9*$ROW_HEIGHT + 50]
+paint metal4
 label VGND FreeSans 0.25u -met4
 port make
 port use ground
 port class bidirectional
 port connections n s e w
+
+for {set j 0} {$j < 4} {incr j} {
+    box [expr $j * 40 + 509 + $POWER_OFFSET] [expr -16 + 2448] [expr $j * 40 + 541 + $POWER_OFFSET] [expr 16 + 2448]
+    paint via3
+    box [expr $j * 40 + 511 + $POWER_OFFSET] [expr -14 + 2448] [expr $j * 40 + 539 + $POWER_OFFSET] [expr 14 + 2448]
+    paint via2
+}
+for {set j 0} {$j < 5} {incr j} {
+    box [expr $j * 32 + 508 + $POWER_OFFSET] [expr -14 + 2448] [expr $j * 32 + 534 + $POWER_OFFSET] [expr 14 + 2448]
+    paint via1
+}
+box [expr 500 + $POWER_OFFSET] [expr -17 + 2448] [expr 670 + $POWER_OFFSET] [expr 17 + 2448]
+paint metal3
+box [expr 500 + $POWER_OFFSET] [expr -17 + 2448] [expr 670 + $POWER_OFFSET] [expr 17 + 2448]
+paint metal2
 
 box -414 -50 [expr 4 * 736 + 46] [expr 9*$ROW_HEIGHT + 50]
 save register8.mag

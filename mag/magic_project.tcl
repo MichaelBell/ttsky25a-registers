@@ -14,8 +14,8 @@ set POWER_STRIPE_WIDTH 1.7um                 ;# The minimum width is 1.2um
 
 # Power stripes: NET name, x position. You can add additional power stripes for each net, as needed.
 set POWER_STRIPES {
-    VDPWR 12um
-    VGND  15um
+    VDPWR 30um
+    VGND  33um
 }
 # If you use the 3v3 template, uncomment the line below:
 #lappend POWER_STRIPES VAPWR 7um
@@ -29,7 +29,7 @@ cellname rename tt_um_template $TOP_LEVEL_CELL
 # --------------------------------
 proc draw_power_stripe {name x} {
     global POWER_STRIPE_WIDTH
-    box $x 5um $x 109um
+    box $x 5um $x 106um
     box width $POWER_STRIPE_WIDTH
     paint met4
     label $name FreeSans 0.25u -met4
@@ -45,7 +45,7 @@ foreach {name x} $POWER_STRIPES {
     draw_power_stripe $name $x
 }
 
-box 1020 1000 1020 1000
+box 1000 [expr 10000 - 4946] 1000 [expr 10000 - 4946]
 getcell register8 child 0 0
 
 proc draw_top_signal_wire {cxl cyl cxt hyl px} {
@@ -64,11 +64,9 @@ proc draw_top_signal_wire {cxl cyl cxt hyl px} {
 }
 
 proc draw_side_signal_wire {cxl cyl px} {
-    box $cxl $cyl [expr $cxl + 50] [expr $cyl + 34]
-    paint metal2
-    box [expr $cxl + 6] [expr $cyl + 3] [expr $cxl + 44] [expr $cyl + 31]
-    paint via2
-    box $cxl $cyl [expr $px + 23] [expr $cyl + 34]
+    box $cxl $cyl [expr $px + 23] [expr $cyl + 30]
+    paint metal3
+    box [expr $px - 21] $cyl [expr $px + 21] [expr $cyl + 34]
     paint metal3
     box [expr $px - 18] [expr $cyl + 1] [expr $px + 18] [expr $cyl + 33]
     paint via3
@@ -78,22 +76,46 @@ proc draw_side_signal_wire {cxl cyl px} {
     paint metal4
 }
 
-proc add_via1_to4 {llx lly} {
-    box $llx $lly [expr $llx + 32] [expr $lly + 38]
-    paint metal1
-    box [expr $llx + 3] [expr $lly + 6] [expr $llx + 29] [expr $lly + 32]
-    paint via1
-    box $llx $lly [expr $llx + 40] [expr $lly + 34]
-    paint metal2
-    box [expr $llx + 6] [expr $lly + 3] [expr $llx + 34] [expr $lly + 31]
-    paint via2
-    box $llx $lly [expr $llx + 50] [expr $lly + 48]
+proc draw_side_signal_wire_b {cxl cyl px} {
+    box $cxl $cyl [expr $px + 23] [expr $cyl + 30]
     paint metal3
-    box [expr $llx + 3] [expr $lly + 1] [expr $llx + 47] [expr $lly + 37]
+    box [expr $px - 21] [expr $cyl - 4] [expr $px + 21] [expr $cyl + 30]
+    paint metal3
+    box [expr $px - 18] [expr $cyl - 3] [expr $px + 18] [expr $cyl + 29]
     paint via3
-    box $llx $lly [expr $llx + 50] [expr $lly + 38]
+    box [expr $px - 19] [expr $cyl - 4] [expr $px + 19] [expr $cyl + 30]
+    paint metal4
+    box [expr $px - 15] [expr $cyl + 24] [expr $px + 15] 11052
     paint metal4
 }
+
+draw_side_signal_wire 880 9558 14398   ;#CLK
+draw_side_signal_wire_b 780 9788 11362 ;#WEN1
+draw_side_signal_wire 780 9848 11638   ;#WEN0
+
+draw_top_signal_wire 683 10000 723 10040 12742   ;#D0
+draw_top_signal_wire 763 10000 803 10110 12466   ;#D1
+draw_top_signal_wire 843 10000 883 10180 12190   ;#D2
+draw_top_signal_wire 923 10000 963 10250 11914   ;#D3
+
+draw_top_signal_wire 1127 10000 1167 10320 8326   ;#QB0
+draw_top_signal_wire 1541 10000 1581 10390 8050   ;#QB1
+draw_top_signal_wire 1955 10000 1995 10460 7774   ;#QB2
+draw_top_signal_wire 2369 10000 2409 10530 7498   ;#QB3
+
+draw_top_signal_wire 1207 10000 1247 10600 9430   ;#QA0
+draw_top_signal_wire 1621 10000 1661 10670 9154   ;#QA1
+draw_top_signal_wire 2035 10000 2075 10740 8878   ;#QA2
+draw_top_signal_wire 2449 10000 2489 10810 8602   ;#QA3
+
+draw_top_signal_wire 2720 10000 2760 10880 13846  ;#ADDR_A
+draw_top_signal_wire 2640 10000 2680 10950 13294  ;#ADDR_B
+
+# Tie low (ideally would use a proper tie macro but YOLO)
+box 3343 10000 3373 11052
+paint metal4
+box 3067 11052 7237 11082
+paint metal4
 
 # Save the layout and export GDS/LEF
 # ----------------------------------
